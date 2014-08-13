@@ -21,7 +21,7 @@ class GitHub(OAuth2Service):
     """GitHub OAuth integration.
     """
     def __init__(self, redirect_uri):
-        OAuth2Service.__init__(self, 
+        OAuth2Service.__init__(self,  # noqa
             client_id=web.config.github_client_id,
             client_secret=web.config.github_client_secret,
             name='github',
@@ -60,7 +60,7 @@ class Google(OAuth2Service):
     """Google OAuth integration.
     """
     def __init__(self, redirect_uri):
-        OAuth2Service.__init__(self,
+        OAuth2Service.__init__(self,  # noqa
             client_id=web.config.google_client_id,
             client_secret=web.config.google_client_secret,
             name='google',
@@ -83,9 +83,9 @@ class Google(OAuth2Service):
         return OAuth2Service.get_auth_session(self, **kwargs)
 
     def get_userdata(self, code):
-        """Returns the relevant userdata from github.
+        """Returns the relevant userdata from Google.
 
-        This function must be called from githun oauth callback
+        This function must be called from Google oauth callback
         and the auth code must be passed as argument.
         """
         try:
@@ -97,11 +97,12 @@ class Google(OAuth2Service):
             logger.error("failed to get user data from google. Error: %s",
                          str(e), exc_info=True)
 
+
 class Facebook(OAuth2Service):
     """Facebook OAuth integration.
     """
     def __init__(self, redirect_uri):
-        OAuth2Service.__init__(self,
+        OAuth2Service.__init__(self,  # noqa
             client_id=web.config.facebook_client_id,
             client_secret=web.config.facebook_client_secret,
             name='facebook',
@@ -123,13 +124,13 @@ class Facebook(OAuth2Service):
         return OAuth2Service.get_auth_session(self, **kwargs)
 
     def get_userdata(self, code):
-        """Returns the relevant userdata from github.
+        """Returns the relevant userdata from Facebook.
 
-        This function must be called from githun oauth callback
+        This function must be called from Facebook oauth callback
         and the auth code must be passed as argument.
         """
         try:
-            session = self.get_auth_session(
+            session = self.get_auth_session(  # noqa
                     data={'code': code, 'redirect_uri': self.redirect_uri})
             d = session.get('me').json()
             return dict(name=d['name'], email=d['email'], service='Facebook')

@@ -52,8 +52,8 @@ def load_config_from_file(configfile):
 def main():
     if "--config" in sys.argv:
         index = sys.argv.index("--config")
-        configfile = sys.argv[index+1]
-        sys.argv = sys.argv[:index] + sys.argv[index+2:]
+        configfile = sys.argv[index + 1]
+        sys.argv = sys.argv[:index] + sys.argv[index + 2:]
         load_config_from_file(configfile)
 
     webapp.app.run()

@@ -1,16 +1,13 @@
 import web
-import json
 
 from . import account
-from . import oauth
-from . import forms
-from .models import User, Organization, Workshop
-from .template import render_template, context_processor
-from .flash import flash_processor, flash, get_flashed_messages
-from .sendmail import sendmail
+from .models import Workshop
+from .template import context_processor
+from .flash import flash_processor, get_flashed_messages
 # web.config.debug = False
 
 urls = ()
+
 
 def add_urls(module):
     global urls
@@ -19,6 +16,7 @@ def add_urls(module):
         classname = module.__name__ + "." + classname
         module_urls.extend([path, classname])
     urls = urls + tuple(module_urls)
+
 
 def load_all_views():
     from .views import admin
@@ -39,6 +37,7 @@ load_all_views()
 
 app = web.application(urls, globals())
 app.add_processor(flash_processor)
+
 
 @context_processor
 def inject_user():

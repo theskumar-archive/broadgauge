@@ -13,11 +13,13 @@ urls = (
     "/admin/people", "admin_people",
 )
 
+
 def has_admins():
     """Returns True if there is at least one admin defined.
     """
     admins = User.findall(is_admin=True)
     return bool(admins)
+
 
 def admin_required(f):
     def is_current_user_admin():
@@ -41,6 +43,7 @@ def admin_required(f):
             return render_template("permission_denied.html")
     return g
 
+
 class admin:
     @admin_required
     def GET(self):
@@ -57,12 +60,13 @@ class admin:
                 flash('Succefully marked {} as admin'.format(i.email))
                 raise web.seeother("/admin")
             else:
-                admins = User.findall(is_admin=True)                
-                return render_template("admin/index.html", 
-                        admins=admins, 
+                admins = User.findall(is_admin=True)
+                return render_template("admin/index.html",  # noqa
+                        admins=admins,
                         error_add_admin="Not a valid user.")
         else:
             return self.GET()
+
 
 class admin_orgs:
     @admin_required
@@ -79,6 +83,7 @@ class admin_orgs:
         org = Organization.new(name=i.name, city=i.city)
         flash("Successfully created new organizaton.")
         raise web.seeother("/orgs/{}".format(org.id))
+
 
 class admin_people:
     @admin_required

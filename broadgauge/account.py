@@ -6,6 +6,7 @@ import time
 
 from .models import User
 
+
 def get_secret_key():
     return web.config.secret_key
 

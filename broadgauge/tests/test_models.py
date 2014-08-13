@@ -3,11 +3,12 @@ import web
 from ..models import User, Trainer, get_db
 import os
 
+
 class DBTestCase(unittest.TestCase):
     def setUp(self):
         # clear the memoize cache
         get_db.cache.clear()
-        web.config.db_parameters = dict(dbn='sqlite', db=":memory:")        
+        web.config.db_parameters = dict(dbn='sqlite', db=":memory:")
         self.load_schema()
 
     def load_schema(self):
@@ -24,6 +25,7 @@ class DBTestCase(unittest.TestCase):
         dirname = os.path.dirname
         root = dirname(dirname(__file__))
         return open(os.path.join(root, "schema.sql")).read()
+
 
 class UserTest(DBTestCase):
     def test_new(self):
@@ -45,6 +47,7 @@ class UserTest(DBTestCase):
         u.update(name='User 2')
         self.assertEquals(u.name, 'User 2')
         self.assertEquals(User.find(id=u.id).name, 'User 2')
+
 
 class TrainerTest(DBTestCase):
     def test_new(self):

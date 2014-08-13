@@ -79,6 +79,7 @@ class User(Model):
     def is_admin(self):
         return self['is_admin']
 
+
 class Organization(Model):
     TABLE = "organization"
 
@@ -144,6 +145,7 @@ class Organization(Model):
             return member, role
 
         return [make_member(row) for row in result]
+
 
 class Workshop(Model):
     TABLE = "workshop"

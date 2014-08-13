@@ -73,6 +73,7 @@ class workshop_edit:
 
     POST = GET
 
+
 class workshop_set_trainer:
     def GET(self, workshop_id):
         workshop = get_workshop(id=workshop_id)

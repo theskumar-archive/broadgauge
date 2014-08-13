@@ -10,6 +10,7 @@ urls = (
     "/dashboard", "dashboard",
 )
 
+
 class home:
     def GET(self):
         user = account.get_current_user()
@@ -19,7 +20,7 @@ class home:
             pending_workshops = Workshop.findall(status='pending')
             upcoming_workshops = Workshop.findall(status='confirmed')
             completed_workshops = Workshop.findall(status='completed')
-            return render_template("home.html",
+            return render_template("home.html",  # noqa
                 pending_workshops=pending_workshops,
                 upcoming_workshops=upcoming_workshops,
                 completed_workshops=completed_workshops)
@@ -33,4 +34,3 @@ class dashboard:
         upcoming_workshops = Workshop.findall(status='confirmed', trainer_id=user.id)
         return render_template("dashboard.html",
                                upcoming_workshops=upcoming_workshops)
-

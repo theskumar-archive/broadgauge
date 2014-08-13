@@ -2,10 +2,11 @@
 """
 import sys
 
+
 def main():
     if "--test" in sys.argv:
         from broadgauge.tests import main
-        main()  
+        main()
     else:
         from broadgauge.main import main
         main()
